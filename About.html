@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Avaio Marketing Agency</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+    /* Base styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    .carousel-container {
+      width: 90vw;
+      max-width: 900px;
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      perspective: 1300px;
+      position: relative;
+      margin: auto;
+    }
+    .carousel-image {
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 18px 32px rgba(0,0,0,0.5);
+      transition: filter 1s ease, transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 1s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+      user-select: none;
+      will-change: transform, filter, opacity;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      display: flex;
+      align-items: flex-end;
+      color: white;
+    }
+    .carousel-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 15px;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Side images */
+    .carousel-image.side {
+      flex: 1 1 30%;
+      filter: blur(7px);
+      opacity: 0.55;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition-delay: 0.2s;
+    }
+    .carousel-image.side.left {
+      transform: translateX(-20px) scale(0.8) rotateY(20deg);
+    }
+    .carousel-image.side.right {
+      transform: translateX(20px) scale(0.8) rotateY(-20deg);
+    }
+    /* Center image */
+    .carousel-image.center {
+      flex: 5 5 80%;
+      filter: none;
+      opacity: 1;
+      transform: scale(1) translateZ(0);
+      z-index: 10;
+      cursor: default;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Caption overlay */
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.7), transparent);
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .carousel-container {
+        height: 320px;
+      }
+      .carousel-image.side {
+        display: none;
+      }
+      .carousel-image.center {
+        flex: 1 1 100%;
+      }
+    }
+
+    /* Hover effect on side images */
+    .carousel-image.side:hover {
+      filter: blur(4px);
+      opacity: 0.75;
+      transform: scale(0.85) translateZ(30px) rotateY(0deg) translateX(0);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.7);
+      transition-delay: 0s;
+      cursor: pointer;
+      z-index: 15;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .h {
+      background: linear-gradient(to right, #f7f7f7, #ffc800);
+      width: 100%;
+    }
+    .h1 {
+      display: flex;
+      align-items: center;
+    }
+    .f1 {
+      background-image: url('images/1png.png');
+      background-size: 100% auto;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 700px;
+      margin-top: 12px;
+      animation: swipeUp 3s ease-in-out forwards;
+    }
+    @keyframes swipeUp {
+      0% {
+        background-position: center bottom;
+      }
+      100% {
+        background-position: center top;
+      }
+    }
+    .f {
+      background: linear-gradient(to left, #f7f7f7, #ffc800);
+      color: white;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+    h1 {
+      font-size: 24px;
+      font-family: 'Copperplate Gothic Bold Condensed CE';
+    }
+    .h2 {
+      color: #1C355F;
+      font-size: 20px;
+    }
+    .h2 p {
+      font-size: 12px;
+      font-family: '';
+    }
+    #index {
+      background: linear-gradient(to left, #1C355F, #ffffff);
+      width: 100%;
+    }
+    .move {
+      margin: 0;
+      padding: 40px 0;
+      background: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+    /* Styles for toggle buttons */
+    .toggle-button {
+      background-color: #5a67d8; /* Indigo-600 */
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      box-shadow: 0 10px 15px -3px rgba(90, 103, 216, 0.5);
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      margin: 0 0.5rem 1.5rem 0.5rem;
+    }
+    .toggle-button:hover {
+      background-color: #434190; /* Indigo-700 */
+    }
+    /* Styles for the toggle content boxes */
+    .toggle-content {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      color: white;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .toggle-content p, .toggle-content b {
+      color: #fff;
+    }
+    .toggle-content b.text-black {
+      color: black;
+    }
+  </style>
+</head>
+
+<body class="bg-black text-gray-800">
+  <!-- Header / Navbar -->
+  <header class="h">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center ml-auto">
+      <a class="text-2xl font-bold text-indigo-600 tracking-wide" href="index.html">
+        <img src="images/1png.png" alt="Avaio Logo" width="50px" height="50px">
+      </a>
+      <h1 class="h2"><b>AVAIO</b>
+        <p>YOUR VIRTUAL MARKETING PARTNER</p>
+      </h1>
+      <nav class="hidden md:flex space-x-8 font-semibold text-gray-700 ml-auto">
+        <a class="hover:text-indigo-600 transition" href="Services.html">Services</a>
+        <a class="hover:text-indigo-600 transition" href="About.html">About</a>
+        <a class="hover:text-indigo-600 transition" href="Portfolio.html">Portfolio</a>
+        <a class="hover:text-indigo-600 transition" href="Testimonials.html">Testimonials</a>
+        <a class="hover:text-indigo-600 transition" href="Contact.html">Contact</a>
+      </nav>
+      <div class="md:hidden ml-auto">
+        <button aria-label="Toggle menu" class="text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-600" id="menu-btn">
+          <i class="fas fa-bars fa-lg"></i>
+        </button>
+      </div>
+    </div>
+    <nav class="hidden md:hidden bg-white shadow-md" id="mobile-menu">
+      <a class="block px-6 py-3 border-b border-gray-200 font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition" href="Services.html">Services</a>
+      <a class="block px-6 py-3 border-b border-gray-200 font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition" href="About.html">About</a>
+      <a class="block px-6 py-3 border-b border-gray-200 font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition" href="Portfolio.html">Portfolio</a>
+      <a class="block px-6 py-3 border-b border-gray-200 font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition" href="Testimonials.html">Testimonials</a>
+      <a class="block px-6 py-3 font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition" href="Contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- About Section -->
+  <section class="bg-indigo-50 py-10" id="about" style="background: linear-gradient(to left,#1C355F, #ffffff); width:100%;">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center md:items-start md:space-x-16">
+      <div class="md:w-1/2 mb-12 md:mb-0">
+        <img alt="Photo of a diverse marketing team collaborating in a modern office space" class="rounded-lg shadow-lg w-full" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/819418cf-e6b8-4cff-4b05-b50cada4332f.jpg" width="600"/>
+      </div>
+      <div class="md:w-1/2">
+        <h2 class="text-3xl font-bold text-indigo-600 mb-6" style="color:rgb(214, 155, 66); text-align: right">About Avaio</h2>
+        <p class="mb-6 text-gray-700 leading-relaxed" style="color: white; text-align: justify;">
+          Avaio is a full-service marketing agency dedicated to helping brands grow through innovative strategies and creative solutions. Our team of experts combines data-driven insights with creative thinking to deliver measurable results.
+        </p>
+        <p class="mb-6 text-gray-700 leading-relaxed" style="color: white; text-align: justify;">
+          We believe in building strong partnerships with our clients, understanding their unique challenges, and crafting tailored marketing plans that drive success.
+        </p>
+        
+        <div class="max-w-7xl mx-auto px-6 mt-10 pl-1">
+          <button id="btnVision" class="toggle-button">VISION</button>
+          <button id="btnMission" class="toggle-button">MISSION</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision content -->
+    <div id="visionContent" class="max-w-6xl mx-auto px-6 toggle-content hidden mt-5" style="color: rgb(52, 38, 22); text-align: justify;background: linear-gradient(to right, #1C355F, #ffc800)">
+      <h2 class="text-3xl font-bold text-indigo-600 mb-6" style="color:rgb(214, 155, 66); text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); text-align: center;">Vision</h2>
+      <p>
+        "To be the most innovative and trusted marketing partner, empowering brands to thrive in a constantly evolving reel and real world."
+      </p>
+    </div>
+
+    <!-- Mission content -->
+    <div id="missionContent" class="max-w-6xl mx-auto px-6 toggle-content hidden mt-5" style="color: white; text-align: justify;background: linear-gradient(to left, #1C355F, #ffc800)">
+      <h2 class="text-3xl font-bold text-indigo-600 mb-6" style="color:rgb(214, 155, 66);text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); text-align: center;">Mission</h2>
+      <p>
+        At AVAIO, we deliver end-to-end marketing solutions that blend creativity, strategy, and technology. From brand identity to campaign execution, we help businesses grow by crafting tailored, data-driven experiences that connect with audiences and drive measurable success. We are committed to:
+      </p>
+      <p><u style="color:#1C355F"><em><b class="" style="font-size:20px;color:#1C355F">Driving End-to-End Growth:</b></em></u> Orchestrating seamless marketing journeys that span the entire customer lifecycle, from initial awareness to lasting advocacy.</p>
+      <p><u style="color:#1C355F"><em><b class="" style="font-size:20px;color:#1C355F">Delivering Integrated Excellence:</b></em></u> Unifying diverse marketing disciplines – including digital, traditional, content, and analytics – into cohesive strategies that maximize ROI.</p>
+      <p><u style="color:#1C355F"><em><b class="" style="font-size:20px;color:#1C355F">Fostering Client Success:</b></em></u> Acting as a true extension of our clients' teams, providing transparent communication, expert guidance, and measurable results.</p>
+      <p><u style="color:#1C355F"><em><b class="" style="font-size:20px;color:#1C355F">Embracing Innovation:</b></em></u> Continuously evolving our methods and leveraging cutting-edge technologies to keep our clients ahead in a dynamic marketplace.</p>
+      <p><u style="color:#1C355F"><em><b class="" style="font-size:20px;color:#1C355F">Cultivating Lasting Partnerships:</b></em></u> Building trusted relationships through exceptional service, unwavering dedication, and a shared commitment to achieving ambitious business goals.</p>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="f">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+      <p class="mb-4 md:mb-0">© 2025 Avaio Marketing Agency. All rights reserved.</p>
+      <div class="flex space-x-6 text-xl">
+        <a aria-label="Facebook" class="hover:text-blue-500 transition" style="color:#1C355F" href="#">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="hover:text-pink-500 transition" href="https://www.youtube.com/">
+          <img aria-hidden="true" style="color:#1C355F; width:20px; padding-top:4px;" src="https://res.cdn.office.net/officehub/images/content/images/x-refresh-233aa32c49.png">
+        </a>
+        <a aria-label="LinkedIn" class="hover:text-blue-500 transition" style="color:#1C355F" href="#">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a aria-label="Instagram" class="hover:text-pink-500 transition" style="color:#1C355F" href="https://www.instagram.com/avaio.in?igsh=YWY1N2lkcXp3NGVl">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    const btnVision = document.getElementById('btnVision');
+    const btnMission = document.getElementById('btnMission');
+    const visionContent = document.getElementById('visionContent');
+    const missionContent = document.getElementById('missionContent');
+
+    btnVision.addEventListener('click', () => {
+      visionContent.classList.toggle('hidden');
+      // Update button text depending on visibility
+      btnVision.textContent = visionContent.classList.contains('hidden') ? 'VISION' : 'VISION';
+    });
+
+    btnMission.addEventListener('click', () => {
+      missionContent.classList.toggle('hidden');
+      // Update button text depending on visibility
+      btnMission.textContent = missionContent.classList.contains('hidden') ? 'MISSION' : 'MISSION';
+    });
+  </script>
+</body>
+</html>
+
